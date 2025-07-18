@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ParkEase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Parking Slots Overview</h1>
+            <div>
+                <a href="{{ url_for('admin_logs') }}" class="btn btn-secondary">View Full Logs</a>
+                <a href="{{ url_for('admin_logout') }}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Total Occupied</h3>
+                <p>{{ occupied_count }} / 100</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Free</h3>
+                <p>{{ free_count }} / 100</p>
+            </div>
+            <div class="stat-card">
+                <h3>Occupancy Rate</h3>
+                <p>{{ occupancy_rate }}%</p>
+            </div>
+        </div>
+        
+        <div class="parking-grid">
+            {% for slot in slots %}
+            <div class="parking-slot {% if slot.status == 'free' %}free{% else %}occupied{% endif %}">
+                <span class="slot-number">{{ slot.slot_id }}</span>
+                {% if slot.status == 'occupied' and slot.user_details %}
+                <div class="slot-details">
+                    <p><strong>Status:</strong> Occupied</p>
+                    <p><strong>Name:</strong> {{ slot.user_details[1] }}</p>
+                    <p><strong>Phone:</strong> {{ slot.user_details[2] }}</p>
+                    <p><strong>Vehicle:</strong> {{ slot.user_details[3] }}</p>
+                    <p><strong>Type:</strong> {{ slot.user_details[4] }}</p>
+                    <p><strong>Electric:</strong> {{ slot.user_details[5] }}</p>
+                    <p><strong>Entry Time:</strong> {{ slot.user_details[6] }}</p>
+                </div>
+                {% else %}
+                <div class="slot-details">
+                    <p><strong>Status:</strong> Free</p>
+                    <p>Available for parking</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

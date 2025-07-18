@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Exit - ParkEase</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="exit-confirmation">
+            <h1>Thank You for Using ParkEase</h1>
+            <div class="receipt">
+                <div class="receipt-header">
+                    <h2>Parking Receipt</h2>
+                </div>
+                <div class="receipt-body">
+                    <div class="info-row">
+                        <div class="info-label">Name:</div>
+                        <div>{{ name }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Vehicle Number:</div>
+                        <div>{{ vehicle_number }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Entry Time:</div>
+                        <div>{{ entry_time }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Exit Time:</div>
+                        <div>{{ exit_time }}</div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">Duration:</div>
+                        <div>{{ duration_min }} minutes</div>
+                    </div>
+                    <div class="info-row total">
+                        <div class="info-label">Total Amount:</div>
+                        <div>₹{{ "%.2f"|format(price) }}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <form method="POST" action="{{ url_for('process_payment') }}">
+                <button type="submit" class="btn btn-primary">Confirm Payment</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

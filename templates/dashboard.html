@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkEase - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .slot-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .slot-number {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 0.5rem 0;
+        }
+        .slot-label {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Parking Details</h1>
+        
+        <!-- Prominent Slot Display -->
+        <div class="slot-header">
+            <div class="slot-label">Your Parking Slot</div>
+            <div class="slot-number">{{ user[6] }}</div>
+        </div>
+        
+        <div class="user-info">
+            <div class="info-row">
+                <div class="info-label">Name:</div>
+                <div>{{ user[0] }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Phone:</div>
+                <div>{{ user[1] }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Vehicle Number:</div>
+                <div>{{ user[2] }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Vehicle Type:</div>
+                <div>{{ user[3] }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Electric Vehicle:</div>
+                <div>{{ user[4] }}</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Entry Time:</div>
+                <div>{{ user[5] }}</div>
+            </div>
+        </div>
+        
+        <form method="POST" action="{{ url_for('exit_parking') }}" class="exit-form">
+            <button type="submit" class="btn btn-danger">Exit Parking</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
